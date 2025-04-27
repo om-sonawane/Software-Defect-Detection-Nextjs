@@ -17,19 +17,15 @@ export function Footer() {
               before they impact your users.
             </p>
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="text-white/70 hover:text-yellow-300 transition-colors">
+              <a href="https://github.com/om-sonawane" className="text-white/70 hover:text-yellow-300 transition-colors">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </a>
-              <a href="#" className="text-white/70 hover:text-yellow-300 transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-white/70 hover:text-yellow-300 transition-colors">
+              <a href="https://www.linkedin.com/in/om-sonawane03/" className="text-white/70 hover:text-yellow-300 transition-colors">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="mailto:info@defectdetect.com" className="text-white/70 hover:text-yellow-300 transition-colors">
+              <a href="mailto:omsonawane03@gmail.com" className="text-white/70 hover:text-yellow-300 transition-colors">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
               </a>
