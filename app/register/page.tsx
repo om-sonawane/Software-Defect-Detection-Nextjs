@@ -99,7 +99,7 @@ export default function Register() {
       }
     } else if (step === 3) {
       // Validate password
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/;
 if (!passwordRegex.test(formData.password)) {
   setError(
     "Password must contain at least 6 characters, including uppercase, lowercase, number and special character"
@@ -356,102 +356,73 @@ if (!passwordRegex.test(formData.password)) {
             }}
           />
         ))}
-        {/* Overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gray-900/90" />
+               {/* Overlay to ensure text is readable */}
+               <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-md">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-6"
-        >
-          <h1 className="text-4xl font-bold text-white">Create Account</h1>
-          <p className="text-white/80 mt-2">Register to use the software defect detection system</p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-            <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl text-center text-white">Registration</CardTitle>
-              <CardDescription className="text-center text-white/70">
-                Step {currentStep} of {totalSteps}:{" "}
-                {currentStep === 1 ? "Personal Information" : currentStep === 2 ? "Contact Information" : "Security"}
-              </CardDescription>
-              {renderStepIndicator()}
-            </CardHeader>
-            <CardContent>
-              <form
-                onSubmit={currentStep === totalSteps ? handleSubmit : (e) => e.preventDefault()}
-                className="space-y-4"
-              >
-                {error && (
-                  <Alert variant="destructive" className="bg-red-500/80 border-red-600 text-white">
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
+      {/* Registration form */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10 w-full max-w-md"
+      >
+        <Card className="bg-white/10 backdrop-blur-md border-white/30 text-white">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
+            <CardDescription>Join us today! It's quick and easy.</CardDescription>
+          </CardHeader>
+          
+          <CardContent className="space-y-4">
+            {renderStepIndicator()}
+            {error && (
+              <Alert variant="destructive" className="bg-red-500/20 border-red-500 text-white">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {renderStepContent()}
+              <div className="flex justify-between">
+                {currentStep > 1 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="text-white border-white/50 hover:bg-white/10"
+                    onClick={prevStep}
+                  >
+                    Back
+                  </Button>
                 )}
+                {currentStep < totalSteps ? (
+                  <Button
+                    type="button"
+                    className="bg-yellow-400 text-purple-900 hover:bg-yellow-500"
+                    onClick={nextStep}
+                  >
+                    Next
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="bg-green-500 hover:bg-green-600"
+                    disabled={loading}
+                  >
+                    {loading ? "Registering..." : "Register"}
+                  </Button>
+                )}
+              </div>
+            </form>
+          </CardContent>
 
-                {renderStepContent()}
-
-                <div className="flex justify-between mt-6">
-                  {currentStep > 1 ? (
-                    <Button
-                      type="button"
-                      onClick={prevStep}
-                      variant="outline"
-                      className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                    >
-                      Back
-                    </Button>
-                  ) : (
-                    <Link href="/">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                      >
-                        Cancel
-                      </Button>
-                    </Link>
-                  )}
-
-                  {currentStep < totalSteps ? (
-                    <Button
-                      type="button"
-                      onClick={nextStep}
-                      className="bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold"
-                    >
-                      Next
-                    </Button>
-                  ) : (
-                    <Button
-                      type="submit"
-                      className="bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold"
-                      disabled={loading}
-                    >
-                      {loading ? "Registering..." : "Register"}
-                    </Button>
-                  )}
-                </div>
-              </form>
-            </CardContent>
-            <CardFooter className="flex justify-center">
-              <p className="text-sm text-white/80">
-                Already have an account?{" "}
-                <Link href="/login" className="text-yellow-300 hover:text-yellow-200 font-semibold">
-                  Login
-                </Link>
-              </p>
-            </CardFooter>
-          </Card>
-        </motion.div>
-      </div>
+          <CardFooter className="justify-center text-sm">
+            <span>Already have an account?</span>
+            <Link href="/login" className="ml-1 text-yellow-400 hover:underline">
+              Login
+            </Link>
+          </CardFooter>
+        </Card>
+      </motion.div>
     </div>
   )
 }
+
