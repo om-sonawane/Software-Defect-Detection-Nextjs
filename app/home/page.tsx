@@ -1,11 +1,30 @@
 "use client"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { motion } from "framer-motion"
-import { ArrowRight, BarChart2, Shield, Zap } from "lucide-react"
+import { ArrowRight, BarChart2, Shield, Zap, History, LogOut } from "lucide-react"
+import { isLoggedIn, logoutUser } from "@/lib/auth"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Check if user is logged in
+    if (!isLoggedIn()) {
+      router.push("/login")
+    }
+  }, [router])
+
+  const handleLogout = () => {
+    logoutUser()
+    router.push("/")
+  }
+
   // Animation variants for staggered animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -27,20 +46,23 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-900">
+      <Header />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-between items-center mb-12 pt-6"
+          className="flex justify-between items-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Software Defect Detection</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Dashboard</h1>
           <Button
             variant="outline"
             className="bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30"
+            onClick={handleLogout}
           >
-            Logout
+            <LogOut className="mr-2 h-4 w-4" /> Logout
           </Button>
         </motion.div>
 
@@ -136,6 +158,40 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+        >
+          <motion.div variants={itemVariants} className="md:col-span-3">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20 transition-all duration-300 overflow-hidden group">
+              <CardHeader className="pb-2">
+                <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-2">
+                  <History className="h-6 w-6 text-white" />
+                </div>
+                <CardTitle className="text-2xl group-hover:text-blue-300 transition-colors">
+                  Detection History
+                </CardTitle>
+                <CardDescription className="text-white/80">View your past defect detection results</CardDescription>
+              </CardHeader>
+              <CardContent className="text-white/90">
+                <p>
+                  Access your previous defect detection analyses and track your software quality improvements over time.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Link href="/history" className="w-full">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold group-hover:scale-105 transition-transform">
+                    View History
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
@@ -161,6 +217,8 @@ export default function HomePage() {
           </div>
         </motion.div>
       </div>
+
+      <Footer />
     </div>
   )
 }

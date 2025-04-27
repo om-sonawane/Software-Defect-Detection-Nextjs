@@ -7,11 +7,11 @@ import type { User } from "@/types/user"
 interface RegistrationData {
   fullName: string
   address: string
+  gender: string
+  age: string
   username: string
   email: string
   phoneNo: string
-  gender: string
-  age: string
   password: string
 }
 
