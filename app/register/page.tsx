@@ -26,11 +26,11 @@ export default function Register() {
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
+    gender: "male",
+    age: "",
     username: "",
     email: "",
     phoneNo: "",
-    gender: "male",
-    age: "",
     password: "",
     confirmPassword: "",
   })
@@ -99,13 +99,13 @@ export default function Register() {
       }
     } else if (step === 3) {
       // Validate password
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
-      if (!passwordRegex.test(formData.password)) {
-        setError(
-          "Password must contain at least 6 characters, including uppercase, lowercase, number and special character",
-        )
-        return false
-      }
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+if (!passwordRegex.test(formData.password)) {
+  setError(
+    "Password must contain at least 6 characters, including uppercase, lowercase, number and special character"
+  );
+  return false;  // This ensures the function exits and doesn't continue further
+}
       // Confirm password
       if (formData.password !== formData.confirmPassword) {
         setError("Passwords do not match")

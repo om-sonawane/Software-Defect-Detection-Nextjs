@@ -10,9 +10,9 @@ import { Shield, Code, BarChart2, Zap, ArrowRight, FileCode, Database, LineChart
 
 // Background images for carousel
 const backgroundImages = [
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
+  "/astro.jpg",
+  "/blue.jpg",
+  "/desk.jpg",
 ]
 
 // Features data
@@ -69,17 +69,17 @@ const testimonials = [
   {
     quote:
       "DefectDetect has transformed our development process. We've reduced post-release defects by 40% since implementing it.",
-    author: "Sarah Johnson",
+    author: "Siddhi chaudhri",
     role: "CTO, TechSolutions Inc.",
   },
   {
     quote: "The accuracy of the defect predictions is impressive. It's like having an extra QA engineer on the team.",
-    author: "Michael Chen",
+    author: "Neha Sonawane",
     role: "Lead Developer, CodeCraft",
   },
   {
     quote: "We've integrated DefectDetect into our CI/CD pipeline and it's been a game-changer for our code quality.",
-    author: "Emily Rodriguez",
+    author: "Rajeshwar Swami",
     role: "DevOps Manager, CloudNine",
   },
 ]
@@ -116,8 +116,7 @@ export default function LandingPage() {
               }}
             />
           ))}
-          {/* Overlay to ensure text is readable */}
-          <div className="absolute inset-0 bg-gray-900/90" />
+         
         </div>
 
         {/* Hero Content */}
