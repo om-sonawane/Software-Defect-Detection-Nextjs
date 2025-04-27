@@ -357,7 +357,7 @@ export default function Register() {
           />
         ))}
         {/* Overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/70 to-purple-600/70" />
+        <div className="absolute inset-0 bg-gray-900/90" />
       </div>
 
       {/* Content */}
