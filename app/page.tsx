@@ -84,7 +84,7 @@ const teamMembers = [
     name: "Neha Sonawane",
     role: "UI/UX Designer",
     image: "neha.jpeg",
-    bgColor: "bg-gray-400",
+    bgColor: "bg-pink-400",
     size: "w-52 h-52", // Medium size
   },
   {
