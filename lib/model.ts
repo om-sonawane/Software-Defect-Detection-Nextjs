@@ -30,7 +30,7 @@ interface SoftwareMetrics {
 }
 
 // Function to detect defects based on input metrics
-export async function detectDefects(metrics: SoftwareMetrics): Promise<{ defectDetected: boolean }> {
+export async function detectDefects(metrics: SoftwareMetrics): Promise<{ defectDetected: boolean; reason?: string }> {
   try {
     // ==================== DECISION TREE LOGIC ====================
     // This is a simplified decision tree based on common defect indicators
@@ -96,7 +96,7 @@ export async function detectDefects(metrics: SoftwareMetrics): Promise<{ defectD
       await storeDefectResult(currentUser.id, metrics, defectDetected, defectReason)
     }
 
-    return { defectDetected }
+    return { defectDetected, reason: defectReason }
   } catch (error) {
     console.error("Error in defect detection:", error)
     throw new Error("Failed to process defect detection")

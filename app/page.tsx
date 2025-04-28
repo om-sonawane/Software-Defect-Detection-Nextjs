@@ -64,24 +64,37 @@ const steps = [
   },
 ]
 
-// Testimonials data
-const testimonials = [
+// Team members data with subtle size differences
+const teamMembers = [
   {
-    quote:
-      "DefectDetect has transformed our development process. We've reduced post-release defects by 40% since implementing it.",
-    author: "Siddhi chaudhri",
-    role: "CTO, TechSolutions Inc.",
+    name: "Siddhi Chaudhri",
+    role: "ML Engineer",
+    image: "sidd.jpg",
+    bgColor: "bg-orange-200",
+    size: "w-52 h-52", // Slightly larger
   },
   {
-    quote: "The accuracy of the defect predictions is impressive. It's like having an extra QA engineer on the team.",
-    author: "Neha Sonawane",
-    role: "Lead Developer, CodeCraft",
+    name: "Om Sonawane",
+    role: "Full Stack Developer",
+    image: "omkar.jpg",
+    bgColor: "bg-gray-200",
+    size: "w-56 h-56", // Largest (center)
   },
   {
-    quote: "We've integrated DefectDetect into our CI/CD pipeline and it's been a game-changer for our code quality.",
-    author: "Rajeshwar Swami",
-    role: "DevOps Manager, CloudNine",
+    name: "Neha Sonawane",
+    role: "Lead Data Scientist",
+    image: "neha.jpeg",
+    bgColor: "bg-gray-400",
+    size: "w-52 h-52", // Medium size
   },
+  {
+    name: "Rajeshwar Swami",
+    role: "Full Stack Developer",
+    image: "raj.jpeg",
+    bgColor: "bg-blue-900",
+    size: "w-52 h-52", // Slightly larger
+  },
+ 
 ]
 
 export default function LandingPage() {
@@ -116,6 +129,7 @@ export default function LandingPage() {
               }}
             />
           ))}
+    
          
         </div>
 
@@ -272,45 +286,67 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-gray-800">
+      {/* About Section (Replacing Testimonials) */}
+      <section id="about" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Users Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Hear from developers who have improved their software quality with our platform.
+              The brilliant minds behind our software defect detection technology
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:bg-white/20 transition-all duration-300"
-              >
-                <div className="mb-4 text-yellow-300">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-xl">
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p className="text-white/90 italic mb-6">"{testimonial.quote}"</p>
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center mr-3">
-                    <span className="text-yellow-300 font-bold">{testimonial.author.charAt(0)}</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-white">{testimonial.author}</p>
-                    <p className="text-white/70 text-sm">{testimonial.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+         {/* Clean team layout with subtle size differences */}
+<div className="flex flex-wrap justify-center items-center gap-6 mb-16">
+  {teamMembers.map((member, index) => {
+    // Center member gets special treatment
+    const isCenter = index === 1;
+    // First image index
+    const isFirst = index === 0;
+    // First image index
+    const isSecond = index === 2;
+    // Last image index
+    const isLast = index === teamMembers.length - 1;
+
+    return (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        viewport={{ once: true }}
+        className={`flex flex-col items-center ${isCenter ? "order-0 md:-mt-4" : ""}`}
+      >
+        <div className="relative mb-6 group">
+          <div className="absolute inset-0 rounded-full bg-pink-200/30 blur-md transform group-hover:scale-110 transition-transform duration-300"></div>
+          <div
+            className={`relative ${member.size} rounded-full overflow-hidden border-4 border-white/20 ${member.bgColor} transition-transform duration-300 hover:scale-105`}
+          >
+            <img
+              src={member.image || "/placeholder.svg"}
+              alt={member.name}
+              className={`w-full h-full object-cover 
+                ${isFirst ? 'object-[40%_10%]' : ''} // First image: slightly left
+                ${isCenter ? 'object-[60%_10%]' : ''} // Second image: slightly left
+                ${isSecond ? 'object-[60%_20%]' : ''} // Third image: slightly left
+                ${isLast ? 'object-[50%_10%]' : ''}  // Last image: slightly down
+              `}
+            />
+          </div>
+        </div>
+        <h3 className="text-xl font-bold text-white">{member.name}</h3>
+        <p className="text-yellow-300">{member.role}</p>
+      </motion.div>
+    );
+  })}
+</div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 max-w-4xl mx-auto">
+            <p className="text-white/90 text-center text-lg leading-relaxed">
+              Our team combines expertise in machine learning, software engineering, and data science to create
+              cutting-edge defect detection solutions. With decades of combined experience in software quality assurance
+              and AI, we're passionate about helping developers build more reliable software.
+            </p>
           </div>
         </div>
       </section>

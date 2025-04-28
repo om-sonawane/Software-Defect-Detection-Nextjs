@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
   return (
@@ -52,7 +52,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="#testimonials" className="text-white/70 hover:text-yellow-300 transition-colors">
-                  Testimonials
+                  About
                 </Link>
               </li>
             </ul>

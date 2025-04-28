@@ -41,8 +41,8 @@ export function Header() {
             <Link href="#how-it-works" className="text-white hover:text-yellow-300 transition-colors">
               How It Works
             </Link>
-            <Link href="#testimonials" className="text-white hover:text-yellow-300 transition-colors">
-              Testimonials
+            <Link href="#about" className="text-white hover:text-yellow-300 transition-colors">
+              About
             </Link>
             {userLoggedIn ? (
               <div className="flex items-center space-x-4">
@@ -119,11 +119,11 @@ export function Header() {
               How It Works
             </Link>
             <Link
-              href="#testimonials"
+              href="#about"
               className="block py-2 text-white hover:text-yellow-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Testimonials
+              About
             </Link>
             {userLoggedIn ? (
               <div className="space-y-2 pt-2 border-t border-white/10">

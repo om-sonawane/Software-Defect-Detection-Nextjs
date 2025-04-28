@@ -9,8 +9,11 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { detectDefects } from "@/lib/model"
-import { Loader2 } from "lucide-react"
+import { generateDefectReport, downloadReport } from "@/lib/report-generator"
+import { Loader2, Download } from "lucide-react"
 import Link from "next/link"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 export default function DetectPage() {
   const [formData, setFormData] = useState({
@@ -36,8 +39,9 @@ export default function DetectPage() {
     branchCount: "",
   })
 
-  const [result, setResult] = useState<null | { defectDetected: boolean }>(null)
+  const [result, setResult] = useState<null | { defectDetected: boolean; reason?: string }>(null)
   const [loading, setLoading] = useState(false)
+  const [downloadingReport, setDownloadingReport] = useState(false)
   const [error, setError] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,14 +75,40 @@ export default function DetectPage() {
     }
   }
 
+  const handleDownloadReport = async () => {
+    if (!result) return
+
+    setDownloadingReport(true)
+    try {
+      // Convert all form values to numbers
+      const numericData = Object.entries(formData).reduce(
+        (acc, [key, value]) => {
+          acc[key] = Number.parseFloat(value)
+          return acc
+        },
+        {} as Record<string, number>,
+      )
+
+      const reportBlob = await generateDefectReport(numericData, result.defectDetected, result.reason)
+      downloadReport(reportBlob)
+    } catch (err) {
+      console.error("Error generating report:", err)
+      setError("Failed to generate report")
+    } finally {
+      setDownloadingReport(false)
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <Header />
+
+      <div className="max-w-7xl mx-auto p-4 pt-24">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-white">Software Defect Detection</h1>
-          <Link href="/">
+          <Link href="/home">
             <Button variant="outline" className="border-white text-white hover:bg-gray-700">
-              Back to Home
+              Back to Dashboard
             </Button>
           </Link>
         </div>
@@ -433,6 +463,11 @@ export default function DetectPage() {
                           <p>
                             Based on the provided metrics, our model has detected potential defects in your software.
                           </p>
+                          {result.reason && (
+                            <p className="mt-2 text-red-200">
+                              <strong>Reason:</strong> {result.reason}
+                            </p>
+                          )}
                         </div>
                         <div className="mt-4">
                           <h4 className="text-lg font-semibold mb-2">Report Generated</h4>
@@ -440,7 +475,23 @@ export default function DetectPage() {
                             A detailed report has been generated with information about the potential defects and
                             recommendations for fixing them.
                           </p>
-                          <Button className="mt-4 bg-red-700 hover:bg-red-800">Download Report</Button>
+                          <Button
+                            className="mt-4 bg-red-700 hover:bg-red-800"
+                            onClick={handleDownloadReport}
+                            disabled={downloadingReport}
+                          >
+                            {downloadingReport ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Generating...
+                              </>
+                            ) : (
+                              <>
+                                <Download className="mr-2 h-4 w-4" />
+                                Download Report
+                              </>
+                            )}
+                          </Button>
                         </div>
                       </div>
                     ) : (
@@ -458,7 +509,23 @@ export default function DetectPage() {
                             A detailed report has been generated confirming the quality of your software based on the
                             provided metrics.
                           </p>
-                          <Button className="mt-4 bg-green-700 hover:bg-green-800">Download Report</Button>
+                          <Button
+                            className="mt-4 bg-green-700 hover:bg-green-800"
+                            onClick={handleDownloadReport}
+                            disabled={downloadingReport}
+                          >
+                            {downloadingReport ? (
+                              <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Generating...
+                              </>
+                            ) : (
+                              <>
+                                <Download className="mr-2 h-4 w-4" />
+                                Download Report
+                              </>
+                            )}
+                          </Button>
                         </div>
                       </div>
                     )}
@@ -476,6 +543,8 @@ export default function DetectPage() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }
