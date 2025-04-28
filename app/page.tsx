@@ -68,7 +68,7 @@ const steps = [
 const teamMembers = [
   {
     name: "Siddhi Chaudhri",
-    role: "ML Engineer",
+    role: "UI/UX Designer",
     image: "sidd.jpg",
     bgColor: "bg-orange-200",
     size: "w-52 h-52", // Slightly larger
@@ -76,20 +76,20 @@ const teamMembers = [
   {
     name: "Om Sonawane",
     role: "Full Stack Developer",
-    image: "omkar.jpg",
+    image: "omii.png",
     bgColor: "bg-gray-200",
     size: "w-56 h-56", // Largest (center)
   },
   {
     name: "Neha Sonawane",
-    role: "Lead Data Scientist",
+    role: "UI/UX Designer",
     image: "neha.jpeg",
     bgColor: "bg-gray-400",
     size: "w-52 h-52", // Medium size
   },
   {
     name: "Rajeshwar Swami",
-    role: "Full Stack Developer",
+    role: "Research Analyst",
     image: "raj.jpeg",
     bgColor: "bg-blue-900",
     size: "w-52 h-52", // Slightly larger
@@ -327,7 +327,7 @@ export default function LandingPage() {
               alt={member.name}
               className={`w-full h-full object-cover 
                 ${isFirst ? 'object-[40%_10%]' : ''} // First image: slightly left
-                ${isCenter ? 'object-[60%_10%]' : ''} // Second image: slightly left
+                ${isCenter ? 'object-[60%_0%]' : ''} // Second image: slightly left
                 ${isSecond ? 'object-[60%_20%]' : ''} // Third image: slightly left
                 ${isLast ? 'object-[50%_10%]' : ''}  // Last image: slightly down
               `}

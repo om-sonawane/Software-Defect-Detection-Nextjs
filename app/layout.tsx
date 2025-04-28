@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Software Defect Detection",
   description: "Predict software defects using machine learning",
-    generator: 'v0.dev'
+    generator: 'Next.js',
 }
 
 export default function RootLayout({
