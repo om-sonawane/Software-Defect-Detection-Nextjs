@@ -76,7 +76,7 @@ const teamMembers = [
   {
     name: "Om Sonawane",
     role: "Full Stack Developer",
-    image: "omii.png",
+    image: "osss.png",
     bgColor: "bg-gray-200",
     size: "w-56 h-56", // Largest (center)
   },
