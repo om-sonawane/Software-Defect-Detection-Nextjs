@@ -206,9 +206,9 @@ The top 5 most important features for defect prediction:
 ## Technical Support
 
 For technical issues or questions:
-- Email: support@defectdetect.com
+- Email: omsonawane03@gmail.com
 - Documentation: https://docs.defectdetect.com
-- GitHub: https://github.com/defectdetect/software-defect-detection
+- GitHub: [https://github.com/defectdetect/software-defect-detection](https://github.com/om-sonawane/Software-Defect-Detection-Nextjs)
 
 ## References
 
