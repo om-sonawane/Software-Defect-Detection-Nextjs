@@ -255,7 +255,7 @@ export default function HomePage() {
                   <div className="text-white/80">Metrics Analyzed</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4 text-center">
-                  <div className="text-4xl font-bold text-yellow-300 mb-2">300+</div>
+                  <div className="text-4xl font-bold text-yellow-300 mb-2">30+</div>
                   <div className="text-white/80">Projects Processed</div>
                 </div>
               </div>

@@ -42,7 +42,7 @@ export async function detectDefects(metrics: SoftwareMetrics): Promise<{ defectD
 
     // Check if the metrics already have a defects field (from the CSV)
     if (metrics.defects !== undefined) {
-      defectDetected = metrics.defects === 1 || metrics.defects === true
+      defectDetected = (metrics.defects === 1) 
       defectReason = "Defect detected from provided data"
       console.log("Using defect status from provided data:", defectDetected)
     }

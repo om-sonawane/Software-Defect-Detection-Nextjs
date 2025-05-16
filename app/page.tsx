@@ -104,7 +104,7 @@ export default function LandingPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length)
-    }, 5000)
+    }, 3000)
 
     return () => clearInterval(interval)
   }, [])
@@ -129,8 +129,6 @@ export default function LandingPage() {
               }}
             />
           ))}
-    
-         
         </div>
 
         {/* Hero Content */}
@@ -143,11 +141,13 @@ export default function LandingPage() {
               className="mb-12"
             >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-                Predict Software <span className="text-yellow-300">Defects</span> Before They Happen
+                Predict Software{" "}
+                <span className="text-yellow-300">Defects</span> Before They
+                Happen
               </h1>
               <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto">
-                Our machine learning-powered platform analyzes software metrics to identify potential defects before
-                they impact your users.
+                Our machine learning-powered platform analyzes software metrics
+                to identify potential defects before they impact your users.
               </p>
             </motion.div>
 
@@ -190,7 +190,7 @@ export default function LandingPage() {
                   <div>Accuracy</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-4xl font-bold text-yellow-300">300+</div>
+                  <div className="text-4xl font-bold text-yellow-300">30+</div>
                   <div>Projects Analyzed</div>
                 </div>
                 <div className="flex flex-col items-center">
@@ -207,10 +207,12 @@ export default function LandingPage() {
       <section id="features" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Powerful Features</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Powerful Features
+            </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Our software defect detection platform offers a comprehensive set of features to help you improve code
-              quality.
+              Our software defect detection platform offers a comprehensive set
+              of features to help you improve code quality.
             </p>
           </div>
 
@@ -227,7 +229,9 @@ export default function LandingPage() {
                 <div className="w-14 h-14 rounded-full bg-purple-900/50 flex items-center justify-center mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {feature.title}
+                </h3>
                 <p className="text-white/70">{feature.description}</p>
               </motion.div>
             ))}
@@ -239,9 +243,12 @@ export default function LandingPage() {
       <section id="how-it-works" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              How It Works
+            </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Our platform uses machine learning to analyze software metrics and predict potential defects.
+              Our platform uses machine learning to analyze software metrics and
+              predict potential defects.
             </p>
           </div>
 
@@ -262,7 +269,9 @@ export default function LandingPage() {
                   <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-4">
                     {step.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {step.title}
+                  </h3>
                   <p className="text-white/70">{step.description}</p>
                 </div>
                 {index < steps.length - 1 && (
@@ -290,62 +299,80 @@ export default function LandingPage() {
       <section id="about" className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Meet Our Team
+            </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              The brilliant minds behind our software defect detection technology
+              The brilliant minds behind our software defect detection
+              technology
             </p>
           </div>
 
-         {/* Clean team layout with subtle size differences */}
-<div className="flex flex-wrap justify-center items-center gap-6 mb-16">
-  {teamMembers.map((member, index) => {
-    // Center member gets special treatment
-    const isCenter = index === 1;
-    // First image index
-    const isFirst = index === 0;
-    // First image index
-    const isSecond = index === 2;
-    // Last image index
-    const isLast = index === teamMembers.length - 1;
+          {/* Clean team layout with subtle size differences */}
+          <div className="flex flex-wrap justify-center items-center gap-6 mb-16">
+            {teamMembers.map((member, index) => {
+              // Center member gets special treatment
+              const isCenter = index === 1;
+              // First image index
+              const isFirst = index === 0;
+              // First image index
+              const isSecond = index === 2;
+              // Last image index
+              const isLast = index === teamMembers.length - 1;
 
-    return (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        viewport={{ once: true }}
-        className={`flex flex-col items-center ${isCenter ? "order-0 md:-mt-4" : ""}`}
-      >
-        <div className="relative mb-6 group">
-          <div className="absolute inset-0 rounded-full bg-pink-200/30 blur-md transform group-hover:scale-110 transition-transform duration-300"></div>
-          <div
-            className={`relative ${member.size} rounded-full overflow-hidden border-4 border-white/20 ${member.bgColor} transition-transform duration-300 hover:scale-105`}
-          >
-            <img
-              src={member.image || "/placeholder.svg"}
-              alt={member.name}
-              className={`w-full h-full object-cover 
-                ${isFirst ? 'object-[40%_10%]' : ''} // First image: slightly left
-                ${isCenter ? 'object-[60%_0%]' : ''} // Second image: slightly left
-                ${isSecond ? 'object-[60%_20%]' : ''} // Third image: slightly left
-                ${isLast ? 'object-[50%_10%]' : ''}  // Last image: slightly down
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`flex flex-col items-center ${
+                    isCenter ? "order-0 md:-mt-4" : ""
+                  }`}
+                >
+                  <div className="relative mb-6 group">
+                    <div className="absolute inset-0 rounded-full bg-pink-200/30 blur-md transform group-hover:scale-110 transition-transform duration-300"></div>
+                    <div
+                      className={`relative ${member.size} rounded-full overflow-hidden border-4 border-white/20 ${member.bgColor} transition-transform duration-300 hover:scale-105`}
+                    >
+                      <img
+                        src={member.image || "/placeholder.svg"}
+                        alt={member.name}
+                        className={`w-full h-full object-cover 
+                ${
+                  isFirst ? "object-[40%_10%]" : ""
+                } // First image: slightly left
+                ${
+                  isCenter ? "object-[60%_0%]" : ""
+                } // Second image: slightly left
+                ${
+                  isSecond ? "object-[60%_20%]" : ""
+                } // Third image: slightly left
+                ${
+                  isLast ? "object-[50%_10%]" : ""
+                }  // Last image: slightly down
               `}
-            />
+                      />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-white">
+                    {member.name}
+                  </h3>
+                  <p className="text-yellow-300">{member.role}</p>
+                </motion.div>
+              );
+            })}
           </div>
-        </div>
-        <h3 className="text-xl font-bold text-white">{member.name}</h3>
-        <p className="text-yellow-300">{member.role}</p>
-      </motion.div>
-    );
-  })}
-</div>
 
           <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 max-w-4xl mx-auto">
             <p className="text-white/90 text-center text-lg leading-relaxed">
-              Our team combines expertise in machine learning, software engineering, and data science to create
-              cutting-edge defect detection solutions. With decades of combined experience in software quality assurance
-              and AI, we're passionate about helping developers build more reliable software.
+              We're a team of passionate developers and tech enthusiasts working
+              on a smart system to detect software defects early. By combining
+              our knowledge of machine learning, coding, and data, we're
+              building a tool that helps developers write better, more reliable
+              software. Our goal is to make debugging easier and save time by
+              catching problems before they become bigger issues.
             </p>
           </div>
         </div>
@@ -360,9 +387,12 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Improve Your Software Quality?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready to Improve Your Software Quality?
+            </h2>
             <p className="text-xl text-white/80 max-w-3xl mx-auto mb-10">
-              Join thousands of developers who use our platform to detect and prevent software defects.
+              Join thousands of developers who use our platform to detect and
+              prevent software defects.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/register">
@@ -389,5 +419,5 @@ export default function LandingPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
